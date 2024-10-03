@@ -1,25 +1,113 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.9.34728.123
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{4C7F0350-56F0-4C00-850C-993462ADF7E3}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C7F0350-56F0-4C00-850C-993462ADF7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C7F0350-56F0-4C00-850C-993462ADF7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C7F0350-56F0-4C00-850C-993462ADF7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C7F0350-56F0-4C00-850C-993462ADF7E3}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5CBA2F77-C7C6-40AC-A154-3BB14EA6382C}
-	EndGlobalSection
-EndGlobal
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System;
+
+namespace VoadorPairador
+{
+    public interface IVoador
+    {
+        void Voar();
+    }
+
+    public interface IPairador
+    {
+        void Pairar();
+    }
+
+    public class Passarinho : IVoador, IPairador
+    {
+        public void Voar()
+        {
+            Console.WriteLine("O passarinho está voando!");
+        }
+
+        public void Pairar()
+        {
+            Console.WriteLine("O passarinho está pairando no ar!");
+        }
+    }
+
+    public class Aviao : IVoador
+    {
+        public void Voar()
+        {
+            Console.WriteLine("O avião está voando!");
+        }
+    }
+
+    public class Helicoptero : IVoador, IPairador
+    {
+        public void Voar()
+        {
+            Console.WriteLine("O helicóptero está voando!");
+        }
+
+        public void Pairar()
+        {
+            Console.WriteLine("O helicóptero está pairando no ar!");
+        }
+    }
+
+    public class DiscoVoador : IVoador
+    {
+        public void Voar()
+        {
+            Console.WriteLine("O disco voador está voando!");
+        }
+    }
+
+    public class SuperHomem : IVoador, IPairador
+    {
+        public void Voar()
+        {
+            Console.WriteLine("O Super-Homem está voando!");
+        }
+
+        public void Pairar()
+        {
+            Console.WriteLine("O Super-Homem está pairando no ar!");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IVoador[] voadores = new IVoador[]
+            {
+                new Passarinho(),
+                new Aviao(),
+                new Helicoptero(),
+                new DiscoVoador(),
+                new SuperHomem()
+            };
+
+            IPairador[] pairadores = new IPairador[]
+            {
+                new Passarinho(),
+                new Helicoptero(),
+                new SuperHomem()
+            };
+
+            Console.WriteLine("Voadores:");
+            foreach (var voador in voadores)
+            {
+                Console.WriteLine($"Tipo: {voador.GetType().Name}");
+                voador.Voar();
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Pairadores:");
+            foreach (var pairador in pairadores)
+            {
+                Console.WriteLine($"Tipo: {pairador.GetType().Name}");
+                pairador.Pairar();
+                Console.WriteLine();
+            }
+        }
+    }
+}
